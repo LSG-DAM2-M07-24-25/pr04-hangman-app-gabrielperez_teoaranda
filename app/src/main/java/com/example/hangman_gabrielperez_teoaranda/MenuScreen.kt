@@ -4,12 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.hangman_gabrielperez_teoaranda.ui.theme.Hangman_GabrielPerez_TeoArandaTheme
 
@@ -20,8 +24,7 @@ class MenuScreen : ComponentActivity() {
         setContent {
             Hangman_GabrielPerez_TeoArandaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting3(
-                        name = "Android",
+                    Screen2(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -31,17 +34,18 @@ class MenuScreen : ComponentActivity() {
 }
 
 @Composable
-fun Greeting3(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun Screen2(modifier: Modifier) {
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.Green)) {
+        Text(text = "Pantalla 2", modifier = Modifier.align(Alignment.Center))
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun Greeting3Preview() {
+fun Screen2Preview() {
     Hangman_GabrielPerez_TeoArandaTheme {
-        Greeting3("Android")
+        Screen1(modifier = Modifier)
     }
 }
