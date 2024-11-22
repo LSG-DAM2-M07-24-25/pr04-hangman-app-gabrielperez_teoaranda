@@ -42,10 +42,3 @@ fun Screen2(modifier: Modifier) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun Screen2Preview() {
-    Hangman_GabrielPerez_TeoArandaTheme {
-        Screen1(modifier = Modifier)
-    }
-}

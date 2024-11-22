@@ -1,52 +1,70 @@
-package com.example.hangman_gabrielperez_teoaranda
-
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.graphics.Color as ComposeColor
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.hangman_gabrielperez_teoaranda.ui.theme.Hangman_GabrielPerez_TeoArandaTheme
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.hangman_gabrielperez_teoaranda.MainActivity
+import com.example.hangman_gabrielperez_teoaranda.R
 
-class LaunchScreen : ComponentActivity() {
+class SplashScreenActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         setContent {
-            Hangman_GabrielPerez_TeoArandaTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Screen1(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            SplashScreenContent()
         }
+
+        // Programar la transición a la actividad principal
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this, MainActivity::class.java))
+            finish() // Finaliza la actividad SplashScreen
+        }, 3000) // 3 segundos de duración
     }
 }
 
 @Composable
-fun Screen1(modifier: Modifier) {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.Green)) {
-        Text(text = "Pantalla 1", modifier = Modifier.align(Alignment.Center))
+fun SplashScreenContent() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Logo
+        Image(
+            painter = painterResource(id = R.drawable.screen1), // Cambia por tu logo
+            contentDescription = "Logo del juego",
+            modifier = Modifier.size(100.dp)
+        )
+
+        // Texto de carga
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Cargando el juego...",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium,
+            color = ComposeColor.DarkGray
+        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun Screen1Preview() {
-    Hangman_GabrielPerez_TeoArandaTheme {
-        Screen1(modifier = Modifier)
-    }
+fun PreviewSplashScreenContent() {
+    SplashScreenContent()
 }
