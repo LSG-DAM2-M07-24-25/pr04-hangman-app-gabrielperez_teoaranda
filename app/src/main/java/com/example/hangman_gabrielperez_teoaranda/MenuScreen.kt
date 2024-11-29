@@ -53,20 +53,33 @@ fun Screen2(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Box(modifier = Modifier.background(Color.White))
+        Box(modifier = Modifier.background(Color.White)) // Caja blanca
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.Center
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp) // Espacio entre los elementos
         ) {
             Image(
-                painter = painterResource(id = R.drawable.screen1), contentDescription = "Logo del juego", modifier = Modifier.size(190.dp)
+                painter = painterResource(id = R.drawable.screen1),
+                contentDescription = "Logo del juego",
+                modifier = Modifier.size(190.dp)
             )
-            Spacer(modifier = Modifier.height(20.dp))
-            Button(onClick = { }) {
-                Text(text = "Play")
+            Button(
+                onClick = { },
+                modifier = Modifier.size(200.dp, 60.dp)
+            ) {
+                Text(text = "Jugar")
             }
+            Button(
+                onClick = { },
+                modifier = Modifier.size(200.dp, 60.dp)
+            ) {
+                Text(text = "Ayuda")
+            }
+
         }
     }
 }
+
 
 
 
