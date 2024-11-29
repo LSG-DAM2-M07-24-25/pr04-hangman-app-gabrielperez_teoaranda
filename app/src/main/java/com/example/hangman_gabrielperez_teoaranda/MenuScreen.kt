@@ -73,7 +73,7 @@ fun Screen2(modifier: Modifier = Modifier) {
                 contentDescription = "Logo del juego",
                 modifier = Modifier.size(190.dp)
             )
-            
+
             Button(
                 onClick = { },
                 modifier = Modifier.size(200.dp, 60.dp)
