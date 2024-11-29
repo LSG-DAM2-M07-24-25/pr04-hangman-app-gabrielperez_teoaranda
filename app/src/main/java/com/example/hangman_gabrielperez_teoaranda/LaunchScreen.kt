@@ -47,7 +47,7 @@ fun SplashScreenContent(modifier: Modifier = Modifier) {
     ) {
         // Logo
         Image(
-            painter = painterResource(id = R.drawable.screen1), // Cambia por tu logo
+            painter = painterResource(id = R.drawable.screen1),
             contentDescription = "Logo del juego",
             modifier = Modifier.size(100.dp)
         )
