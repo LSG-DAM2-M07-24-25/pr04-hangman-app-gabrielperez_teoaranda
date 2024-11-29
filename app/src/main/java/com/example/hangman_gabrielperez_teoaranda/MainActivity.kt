@@ -92,17 +92,6 @@ fun SplashScreenContent(navController: NavController, modifier: Modifier = Modif
     }
 }
 
-@Composable
-fun Screen2Content() {
-    // Aquí va el contenido de la Screen2
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = "Bienvenido a la Screen2", fontSize = 24.sp)
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 fun SplashScreenContentPreview() {
