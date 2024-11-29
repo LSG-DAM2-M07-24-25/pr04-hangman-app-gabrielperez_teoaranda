@@ -26,6 +26,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import android.os.Handler
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.*
+
 
 
 class MainActivity : ComponentActivity() {
@@ -34,10 +47,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Hangman_GabrielPerez_TeoArandaTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    SplashScreenContent(
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                // Configura la navegación
+                val navController = rememberNavController()
+                NavHost(navController = navController, startDestination = "splash") {
+                    composable("splash") {
+                        SplashScreenContent(navController = navController)
+                    }
+                    composable("screen2") {
+                        Screen2() // Aquí puedes definir el contenido de la Screen2
+                    }
                 }
             }
         }
@@ -45,7 +63,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SplashScreenContent(modifier: Modifier = Modifier) {
+fun SplashScreenContent(navController: NavController, modifier: Modifier = Modifier) {
+    // LaunchedEffect con delay para navegar después de 5 segundos
+    LaunchedEffect(Unit) {
+        kotlinx.coroutines.delay(5000) // 5 segundos
+        navController.navigate("screen2") // Navegar a Screen2
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -68,10 +92,21 @@ fun SplashScreenContent(modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+fun Screen2Content() {
+    // Aquí va el contenido de la Screen2
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(text = "Bienvenido a la Screen2", fontSize = 24.sp)
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun SplashScreenContentPreview() {
     Hangman_GabrielPerez_TeoArandaTheme {
-        SplashScreenContent(modifier = Modifier)
+        SplashScreenContent(navController = rememberNavController())
     }
 }
