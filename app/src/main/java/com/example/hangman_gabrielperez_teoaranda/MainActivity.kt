@@ -26,7 +26,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.hangman_gabrielperez_teoaranda.R
 
 
 class MainActivity : ComponentActivity() {
@@ -53,14 +52,12 @@ fun SplashScreenContent(modifier: Modifier = Modifier) {
             .wrapContentSize(Alignment.Center),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Logo
         Image(
             painter = painterResource(id = R.drawable.screen1), // Cambia por tu logo
             contentDescription = "Logo del juego",
             modifier = Modifier.size(100.dp)
         )
 
-        // Texto de carga
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = "Cargando el juego...",
