@@ -1,5 +1,4 @@
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,13 +19,14 @@ import androidx.compose.ui.unit.sp
 import com.example.hangman_gabrielperez_teoaranda.MainActivity
 import com.example.hangman_gabrielperez_teoaranda.R
 
+
 class SplashScreenActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            SplashScreenContent()
+            SplashScreenContent(modifier = Modifier.fillMaxSize())
         }
 
         // Programar la transición a la actividad principal
@@ -38,9 +38,9 @@ class SplashScreenActivity : AppCompatActivity() {
 }
 
 @Composable
-fun SplashScreenContent() {
+fun SplashScreenContent(modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center),
         horizontalAlignment = Alignment.CenterHorizontally
