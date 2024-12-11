@@ -30,6 +30,7 @@ import android.os.Handler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -47,14 +48,13 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Hangman_GabrielPerez_TeoArandaTheme {
-                // Configura la navegación
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "splash") {
                     composable("splash") {
                         SplashScreenContent(navController = navController)
                     }
                     composable("screen2") {
-                        Screen2() // Aquí puedes definir el contenido de la Screen2
+                        Screen2()
                     }
                 }
             }
@@ -64,12 +64,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SplashScreenContent(navController: NavController, modifier: Modifier = Modifier) {
-    // LaunchedEffect con delay para navegar después de 5 segundos
     LaunchedEffect(Unit) {
-        kotlinx.coroutines.delay(5000) // 5 segundos
-        navController.navigate("screen2") // Navegar a Screen2
+        kotlinx.coroutines.delay(5000)
+        navController.navigate("screen2")
     }
-
     Column(
         modifier = modifier
             .fillMaxSize()
