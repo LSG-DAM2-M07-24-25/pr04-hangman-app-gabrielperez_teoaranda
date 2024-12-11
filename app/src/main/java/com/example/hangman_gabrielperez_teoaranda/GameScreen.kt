@@ -41,6 +41,9 @@ fun Game(modifier: Modifier = Modifier) {
     var incorrectGuesses = remember { mutableStateOf(0) }
     var letters = remember { mutableStateOf(('A'..'Z').toList()) }
 
+    // Dividir las letras en filas de 5
+    val letterRows = letters.value.chunked(5)
+
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -51,6 +54,7 @@ fun Game(modifier: Modifier = Modifier) {
         ) {
             Text(text = "Ahorcado", style = MaterialTheme.typography.headlineMedium)
 
+            // Ahorcado Image (reemplazar con imágenes del ahorcado)
             Image(
                 painter = painterResource(id = R.drawable.screen1),
                 contentDescription = "Hangman",
@@ -63,26 +67,29 @@ fun Game(modifier: Modifier = Modifier) {
                 fontSize = 24.sp
             )
 
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.horizontalScroll(rememberScrollState())
-            ) {
-                letters.value.forEach { letter ->
-                    Button(
-                        onClick = {
-                            if (word.contains(letter)) {
-                                guessedWord.value = updateGuessedWord(word, guessedWord.value, letter)
-                            } else {
-                                incorrectGuesses.value += 1
-                            }
-                            letters.value = letters.value.filter { it != letter } // Disable used letters
-                        },
-                        modifier = Modifier.size(50.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Gray
-                        )
-                    ) {
-                        Text(text = letter.toString(), color = Color.White)
+            // Crear una fila para cada grupo de letras
+            letterRows.forEach { row ->
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
+                ) {
+                    row.forEach { letter ->
+                        Button(
+                            onClick = {
+                                if (word.contains(letter)) {
+                                    guessedWord.value = updateGuessedWord(word, guessedWord.value, letter)
+                                } else {
+                                    incorrectGuesses.value += 1
+                                }
+                                letters.value = letters.value.filter { it != letter } // Desactivar letras usadas
+                            },
+                            modifier = Modifier.size(50.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Gray
+                            )
+                        ) {
+                            Text(text = letter.toString(), color = Color.White)
+                        }
                     }
                 }
             }
@@ -101,7 +108,7 @@ fun Game(modifier: Modifier = Modifier) {
 
             Button(
                 onClick = {
-                    // Restart the game logic
+                    // Reiniciar el juego
                     guessedWord.value = "_ ".repeat(word.length)
                     incorrectGuesses.value = 0
                     letters.value = ('A'..'Z').toList()
