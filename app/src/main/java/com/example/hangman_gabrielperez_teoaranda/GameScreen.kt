@@ -50,7 +50,7 @@ fun Game(modifier: Modifier = Modifier) {
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             Text(text = "Ahorcado", style = MaterialTheme.typography.headlineMedium)
 
@@ -70,7 +70,7 @@ fun Game(modifier: Modifier = Modifier) {
             // Crear una fila para cada grupo de letras
             letterRows.forEach { row ->
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
                 ) {
                     row.forEach { letter ->
@@ -106,17 +106,7 @@ fun Game(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            Button(
-                onClick = {
-                    // Reiniciar el juego
-                    guessedWord.value = "_ ".repeat(word.length)
-                    incorrectGuesses.value = 0
-                    letters.value = ('A'..'Z').toList()
-                },
-                modifier = Modifier.size(200.dp, 60.dp)
-            ) {
-                Text(text = "Reiniciar juego")
-            }
+
         }
     }
 }
