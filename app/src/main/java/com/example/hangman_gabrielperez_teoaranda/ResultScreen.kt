@@ -24,7 +24,7 @@ class ResultScreen : ComponentActivity() {
         setContent {
             Hangman_GabrielPerez_TeoArandaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Screen3(
+                    Screen4(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

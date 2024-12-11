@@ -32,8 +32,8 @@ class SplashScreenActivity : AppCompatActivity() {
         // Programar la transición a la actividad principal
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
-            finish() // Finaliza la actividad SplashScreen
-        }, 3000) // 3 segundos de duración
+            finish()
+        }, 3000)
     }
 }
 
@@ -45,14 +45,12 @@ fun SplashScreenContent(modifier: Modifier = Modifier) {
             .wrapContentSize(Alignment.Center),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Logo
         Image(
             painter = painterResource(id = R.drawable.screen1),
             contentDescription = "Logo del juego",
             modifier = Modifier.size(100.dp)
         )
 
-        // Texto de carga
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = "Cargando el juego...",
