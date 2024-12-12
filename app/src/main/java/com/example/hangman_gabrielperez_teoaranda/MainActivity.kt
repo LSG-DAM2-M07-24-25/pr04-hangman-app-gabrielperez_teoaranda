@@ -96,7 +96,7 @@ fun SplashScreenContent(navController: NavController, modifier: Modifier = Modif
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.screen1), // Cambia por tu logo
+            painter = painterResource(id = R.drawable.hangman6), // Cambia por tu logo
             contentDescription = "Logo del juego",
             modifier = Modifier.size(100.dp)
         )

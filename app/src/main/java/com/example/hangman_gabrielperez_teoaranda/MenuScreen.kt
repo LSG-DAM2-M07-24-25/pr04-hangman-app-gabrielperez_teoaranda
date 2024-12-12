@@ -78,7 +78,7 @@ fun Screen2(navController: NavController, modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.screen1),
+                painter = painterResource(id = R.drawable.hangman6),
                 contentDescription = "Logo del juego",
                 modifier = Modifier.size(190.dp)
             )
