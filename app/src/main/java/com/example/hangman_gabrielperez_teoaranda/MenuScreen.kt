@@ -43,6 +43,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hangman_gabrielperez_teoaranda.ui.theme.Hangman_GabrielPerez_TeoArandaTheme
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 class MenuScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +54,7 @@ class MenuScreen : ComponentActivity() {
             Hangman_GabrielPerez_TeoArandaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Screen2(
+                        navController = rememberNavController(),
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -61,7 +64,7 @@ class MenuScreen : ComponentActivity() {
 }
 
 @Composable
-fun Screen2(modifier: Modifier = Modifier) {
+fun Screen2(navController: NavController, modifier: Modifier = Modifier) {
     var expanded by remember { mutableStateOf(false)}
     var selectedOption by remember { mutableStateOf("Selecciona la dificultat") }
     val options = listOf("facil", "medio", "difícil")
@@ -81,13 +84,13 @@ fun Screen2(modifier: Modifier = Modifier) {
             )
 
             Button(
-                onClick = { },
+                onClick = { navController.navigate(Routes.Game.route) },
                 modifier = Modifier.size(200.dp, 60.dp)
             ) {
                 Text(text = "Jugar")
             }
             Button(
-                onClick = { },
+                onClick = { /* Implementar ayuda */ },
                 modifier = Modifier.size(200.dp, 60.dp)
             ) {
                 Text(text = "Ayuda")
@@ -100,5 +103,5 @@ fun Screen2(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewSplashScreenContent() {
-    Screen2()
+    Screen2(navController = rememberNavController())
 }

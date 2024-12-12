@@ -20,6 +20,10 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class GameScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +31,7 @@ class GameScreen : ComponentActivity() {
         setContent {
             Hangman_GabrielPerez_TeoArandaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Game(modifier = Modifier.padding(innerPadding))
+                    Game(navController = rememberNavController(), modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -35,11 +39,35 @@ class GameScreen : ComponentActivity() {
 }
 
 @Composable
-fun Game(modifier: Modifier = Modifier) {
-    var word = "KOTLIN"
+fun Game(navController: NavController, modifier: Modifier = Modifier) {
+    // Lista de palabras posibles
+    val wordList = listOf(
+        "KOTLIN",
+        "ANDROID",
+        "JETPACK",
+        "COMPOSE",
+        "DESARROLLO",
+        "PROGRAMACION",
+        "VARIABLE",
+        "FUNCION",
+        "CLASE",
+        "OBJETO"
+    )
+    
+    // Seleccionar una palabra aleatoria
+    var word = remember { wordList.random() }
     var guessedWord = remember { mutableStateOf("_ ".repeat(word.length)) }
     var incorrectGuesses = remember { mutableStateOf(0) }
     var letters = remember { mutableStateOf(('A'..'Z').toList()) }
+    var timeTaken = remember { mutableStateOf(0) }
+
+    // Agregar timer
+    LaunchedEffect(Unit) {
+        while(true) {
+            delay(1000)
+            timeTaken.value++
+        }
+    }
 
     // Dividir las letras en filas de 5
     val letterRows = letters.value.chunked(5)
@@ -106,7 +134,16 @@ fun Game(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-
+            // Agregar lógica para verificar victoria o derrota
+            LaunchedEffect(guessedWord.value, incorrectGuesses.value) {
+                if (!guessedWord.value.contains('_')) {
+                    // Victoria
+                    navController.navigate(Routes.Result.createRoute(true, timeTaken.value))
+                } else if (incorrectGuesses.value >= 6) {
+                    // Derrota
+                    navController.navigate(Routes.Result.createRoute(false, timeTaken.value))
+                }
+            }
         }
     }
 }
@@ -126,5 +163,5 @@ fun updateGuessedWord(word: String, guessedWord: String, letter: Char): String {
 @Preview(showBackground = true)
 @Composable
 fun PreviewGameScreen() {
-    Game()
+    Game(navController = rememberNavController())
 }

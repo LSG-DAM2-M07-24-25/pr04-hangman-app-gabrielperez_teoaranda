@@ -17,6 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hangman_gabrielperez_teoaranda.ui.theme.Hangman_GabrielPerez_TeoArandaTheme
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 class ResultScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +30,8 @@ class ResultScreen : ComponentActivity() {
                     Screen4(
                         modifier = Modifier.padding(innerPadding),
                         isWin = true, // Cambiar dependiendo del resultado
-                        timeTaken = 45 // Cambiar dependiendo del tiempo
+                        timeTaken = 45, // Cambiar dependiendo del tiempo
+                        navController = rememberNavController()
                     )
                 }
             }
@@ -37,7 +40,12 @@ class ResultScreen : ComponentActivity() {
 }
 
 @Composable
-fun Screen4(modifier: Modifier, isWin: Boolean, timeTaken: Int) {
+fun Screen4(
+    modifier: Modifier,
+    isWin: Boolean,
+    timeTaken: Int,
+    navController: NavController
+) {
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -72,18 +80,14 @@ fun Screen4(modifier: Modifier, isWin: Boolean, timeTaken: Int) {
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Button(
-                    onClick = {
-                        // Acción para reiniciar el juego
-                    },
+                    onClick = { navController.navigate(Routes.Game.route) },
                     modifier = Modifier.size(200.dp, 60.dp)
                 ) {
                     Text(text = "Volver a jugar")
                 }
 
                 Button(
-                    onClick = {
-                        // Acción para volver al menú
-                    },
+                    onClick = { navController.navigate(Routes.Menu.route) },
                     modifier = Modifier.size(200.dp, 60.dp)
                 ) {
                     Text(text = "Volver al menú")
@@ -97,6 +101,6 @@ fun Screen4(modifier: Modifier, isWin: Boolean, timeTaken: Int) {
 @Composable
 fun Screen4Preview() {
     Hangman_GabrielPerez_TeoArandaTheme {
-        Screen4(modifier = Modifier, isWin = true, timeTaken = 45)
+        Screen4(modifier = Modifier, isWin = true, timeTaken = 45, navController = rememberNavController())
     }
 }

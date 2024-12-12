@@ -39,6 +39,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.*
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 
 
 
@@ -49,12 +51,31 @@ class MainActivity : ComponentActivity() {
         setContent {
             Hangman_GabrielPerez_TeoArandaTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "splash") {
-                    composable("splash") {
+                NavHost(navController = navController, startDestination = Routes.Splash.route) {
+                    composable(Routes.Splash.route) {
                         SplashScreenContent(navController = navController)
                     }
-                    composable("screen2") {
-                        Screen2()
+                    composable(Routes.Menu.route) {
+                        Screen2(navController = navController)
+                    }
+                    composable(Routes.Game.route) {
+                        Game(navController = navController)
+                    }
+                    composable(
+                        route = Routes.Result.route,
+                        arguments = listOf(
+                            navArgument("isWin") { type = NavType.BoolType },
+                            navArgument("timeTaken") { type = NavType.IntType }
+                        )
+                    ) { backStackEntry ->
+                        val isWin = backStackEntry.arguments?.getBoolean("isWin") ?: false
+                        val timeTaken = backStackEntry.arguments?.getInt("timeTaken") ?: 0
+                        Screen4(
+                            modifier = Modifier,
+                            isWin = isWin,
+                            timeTaken = timeTaken,
+                            navController = navController
+                        )
                     }
                 }
             }
@@ -66,7 +87,7 @@ class MainActivity : ComponentActivity() {
 fun SplashScreenContent(navController: NavController, modifier: Modifier = Modifier) {
     LaunchedEffect(Unit) {
         kotlinx.coroutines.delay(5000)
-        navController.navigate("screen2")
+        navController.navigate(Routes.Menu.route)
     }
     Column(
         modifier = modifier
