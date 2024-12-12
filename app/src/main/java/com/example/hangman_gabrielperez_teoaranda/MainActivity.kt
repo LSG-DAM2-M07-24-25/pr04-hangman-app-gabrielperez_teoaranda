@@ -26,6 +26,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import android.os.Handler
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.*
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+
 
 
 class MainActivity : ComponentActivity() {
@@ -34,10 +50,33 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Hangman_GabrielPerez_TeoArandaTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    SplashScreenContent(
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                val navController = rememberNavController()
+                NavHost(navController = navController, startDestination = Routes.Splash.route) {
+                    composable(Routes.Splash.route) {
+                        SplashScreenContent(navController = navController)
+                    }
+                    composable(Routes.Menu.route) {
+                        Screen2(navController = navController)
+                    }
+                    composable(Routes.Game.route) {
+                        Game(navController = navController)
+                    }
+                    composable(
+                        route = Routes.Result.route,
+                        arguments = listOf(
+                            navArgument("isWin") { type = NavType.BoolType },
+                            navArgument("timeTaken") { type = NavType.IntType }
+                        )
+                    ) { backStackEntry ->
+                        val isWin = backStackEntry.arguments?.getBoolean("isWin") ?: false
+                        val timeTaken = backStackEntry.arguments?.getInt("timeTaken") ?: 0
+                        Screen4(
+                            modifier = Modifier,
+                            isWin = isWin,
+                            timeTaken = timeTaken,
+                            navController = navController
+                        )
+                    }
                 }
             }
         }
@@ -45,7 +84,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SplashScreenContent(modifier: Modifier = Modifier) {
+fun SplashScreenContent(navController: NavController, modifier: Modifier = Modifier) {
+    LaunchedEffect(Unit) {
+        kotlinx.coroutines.delay(5000)
+        navController.navigate(Routes.Menu.route)
+    }
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -72,6 +115,6 @@ fun SplashScreenContent(modifier: Modifier = Modifier) {
 @Composable
 fun SplashScreenContentPreview() {
     Hangman_GabrielPerez_TeoArandaTheme {
-        SplashScreenContent(modifier = Modifier)
+        SplashScreenContent(navController = rememberNavController())
     }
 }

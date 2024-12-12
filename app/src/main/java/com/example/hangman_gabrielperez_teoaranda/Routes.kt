@@ -1,9 +1,10 @@
 package com.example.hangman_gabrielperez_teoaranda
 
-class Routes {
-    sealed class Routes(val route: String) {
-        object Pantalla1:Routes("pantalla1")
-        object Pantalla2:Routes("pantalla2")
-        object Pantalla3:Routes("pantalla3")
+sealed class Routes(val route: String) {
+    object Splash : Routes("splash")
+    object Menu : Routes("menu")
+    object Game : Routes("game")
+    object Result : Routes("result/{isWin}/{timeTaken}") {
+        fun createRoute(isWin: Boolean, timeTaken: Int) = "result/$isWin/$timeTaken"
     }
 }

@@ -1,0 +1,27 @@
+Gabriel Perez i Teo Aranda
+
+## Hangman ##
+
+## Descripción ##
+
+El juego de Hangman es un juego de palabras en el que el jugador debe adivinar una palabra oculta letra por letra. El jugador tiene un número limitado de intentos para adivinar la palabra antes de que la cuerda se rompa. Si el jugador adivina todas las letras de la palabra antes de que se rompe la cuerda, gana el juego. Si el jugador no adivina todas las letras de la palabra antes de que se rompe la cuerda, pierde el juego.
+
+## Requisitos ##
+
+- Android Studio
+- Kotlin
+- Java
+- XML
+
+## Instrucciones ##
+
+1. Clonar el repositorio
+2. Abrir el proyecto en Android Studio
+3. Ejecutar el proyecto
+
+## Instrucciones de juego ##
+
+1. El jugador debe adivinar la palabra oculta letra por letra.
+2. El jugador tiene un número limitado de intentos para adivinar la palabra antes de que se rompe la cuerda.
+3. Si el jugador adivina todas las letras de la palabra antes de que se rompe la cuerda, gana el juego.
+4. Si el jugador no adivina todas las letras de la palabra antes de que se rompe la cuerda, pierde el juego.
