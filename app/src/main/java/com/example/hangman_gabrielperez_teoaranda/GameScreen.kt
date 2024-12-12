@@ -72,6 +72,20 @@ fun Game(navController: NavController, modifier: Modifier = Modifier) {
     // Dividir las letras en filas de 5
     val letterRows = letters.value.chunked(5)
 
+    // Función para obtener la imagen según el número de errores
+    fun getHangmanImage(incorrectGuesses: Int): Int {
+        return when (incorrectGuesses) {
+            0 -> R.drawable.hangman0 // Base del ahorcado
+            1 -> R.drawable.hangman1 // Cabeza
+            2 -> R.drawable.hangman2 // Cabeza + Torso
+            3 -> R.drawable.hangman3 // Cabeza + Torso + Brazo izquierdo
+            4 -> R.drawable.hangman4 // Cabeza + Torso + Ambos brazos
+            5 -> R.drawable.hangman5 // Cabeza + Torso + Ambos brazos + Pierna izquierda
+            6 -> R.drawable.hangman6 // Ahorcado completo
+            else -> R.drawable.hangman0
+        }
+    }
+
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -82,11 +96,11 @@ fun Game(navController: NavController, modifier: Modifier = Modifier) {
         ) {
             Text(text = "Ahorcado", style = MaterialTheme.typography.headlineMedium)
 
-            // Ahorcado Image (reemplazar con imágenes del ahorcado)
+            // Actualizar la imagen según el número de errores
             Image(
-                painter = painterResource(id = R.drawable.screen1),
-                contentDescription = "Hangman",
-                modifier = Modifier.size(150.dp)
+                painter = painterResource(id = getHangmanImage(incorrectGuesses.value)),
+                contentDescription = "Hangman state ${incorrectGuesses.value}",
+                modifier = Modifier.size(200.dp)
             )
 
             Text(
