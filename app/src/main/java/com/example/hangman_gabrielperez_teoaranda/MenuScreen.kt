@@ -89,13 +89,6 @@ fun Screen2(navController: NavController, modifier: Modifier = Modifier) {
             ) {
                 Text(text = "Jugar")
             }
-            Button(
-                onClick = { /* Implementar ayuda */ },
-                modifier = Modifier.size(200.dp, 60.dp)
-            ) {
-                Text(text = "Ayuda")
-            }
-
         }
     }
 }
